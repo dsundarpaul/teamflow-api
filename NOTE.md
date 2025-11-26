@@ -9,6 +9,11 @@
 
 [] Users
 - [] Get all
+  - [] serach
+  - [] pagination
+  - [] filter
+  - [] gaurds
+  - [] dls
 - [] Create User
   - [] user user should be automatically created under a team if created by a admin, if super admin get team's ref
 - [] Update User
