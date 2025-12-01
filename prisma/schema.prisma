@@ -11,6 +11,16 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum Status {
+  Active
+  Inactive
+}
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -19,14 +29,12 @@ model User {
   avatar    String 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      Role     @default(USER)
 }
 
-// enum Status {
-//   Active,
-//   Inactive
-// }
+// each team should uniquely identify by name
+// each team should contain a list of unique users
+// a user should be part of multiple teams, unless he is an admin
+// while creating a team, atleaset there should be one admin and 1 user.
+// model Teams {}
 
-// enum Role {
-//   User,
-//   Admin
-// }

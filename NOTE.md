@@ -44,3 +44,12 @@
 - [] Add role in user (USER, ADMIN, SUPERADMIN)
   - [] update curd accordingly
 - 
+
+
+role - should be in team level.
+
+- all users bydefault will of role user.
+- any user should be able to create a team.
+- if a user create's a team, he is bydefault admin of that team.
+- mulitple user's can exist in muliple teams.
+

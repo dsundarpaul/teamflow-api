@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma.service';
 import { contains } from 'class-validator';
+import { FindAllUsersDto } from './dto/find-all-users.dto';
 
 @Injectable()
 export class UsersService {
@@ -20,8 +21,17 @@ export class UsersService {
     return user;
   }
 
-  async findAll() {
-    return await this.prisma.user.findMany();
+  async findAll(query: FindAllUsersDto) {
+    return await this.prisma.user.findMany({
+      skip: Number(query.page) * Number(query.limit),
+      take: Number(query.limit),
+      orderBy: {
+        username: query.sort,
+      },
+      where: {
+        role: query.role,
+      },
+    });
   }
 
   async findUserById(id: string) {

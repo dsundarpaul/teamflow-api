@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  // Patch,
   Post,
   Put,
   Query,
@@ -13,7 +12,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
-import { get } from 'http';
+import { FindAllUsersDto } from './dto/find-all-users.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard)
@@ -21,8 +20,9 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  async getUsers() {
-    return this.usersService.findAll();
+  async getUsers(@Query() query: FindAllUsersDto) {
+    console.log(query);
+    return this.usersService.findAll(query);
   }
 
   @Get(':id')
@@ -40,21 +40,13 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  // Put/users/:id
   @Put(':id')
   async replaceUser(@Param('id') id: string, @Body() dto: any) {
     return this.usersService.updateUser(id, dto);
   }
 
-  // DELETE /users/:id
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
     return this.usersService.deleteUser(id);
   }
 }
-
-// GET /users?search=example
-// @Get()
-// async getUsers(@Query() query: any) {
-//   return this.usersService.findAll(query);
-// }
