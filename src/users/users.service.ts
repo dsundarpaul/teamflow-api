@@ -56,18 +56,18 @@ export class UsersService {
     });
   }
   // SEARCH + GET ALL
-  async findALL(query: any) {
-    const { search = '' } = query;
+  //   async findALL(query: any) {
+  //     const { search = '' } = query;
 
-    const where: any = {};
+  //     const where: any = {};
 
-    if (search) {
-      where.OR = [
-        { email: { contains: search, mode: 'insensitive' } },
-        { username: { contains: search, mode: 'insensitive' } },
-      ];
-    }
+  //     if (search) {
+  //       where.OR = [
+  //         { email: { contains: search, mode: 'insensitive' } },
+  //         { username: { contains: search, mode: 'insensitive' } },
+  //       ];
+  //     }
 
-    return await this.prisma.user.findMany({ where });
-  }
+  //     return await this.prisma.user.findMany({ where });
+  //   }
 }

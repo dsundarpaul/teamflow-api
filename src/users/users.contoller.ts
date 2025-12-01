@@ -17,7 +17,6 @@ import { get } from 'http';
 
 @Controller('users')
 @UseGuards(AuthGuard)
-
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -55,7 +54,7 @@ export class UsersController {
 }
 
 // GET /users?search=example
-  @Get()
-  async getUsers(@Query() query: any) {
-    return this.usersService.findAll(query);
-  }
+// @Get()
+// async getUsers(@Query() query: any) {
+//   return this.usersService.findAll(query);
+// }
