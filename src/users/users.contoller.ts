@@ -7,15 +7,13 @@ import {
   Post,
   Put,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
-import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { FindAllUsersDto } from './dto/find-all-users.dto';
+import { IsPublic } from 'src/auth/decorators';
 
 @Controller('users')
-@UseGuards(AuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -35,6 +33,7 @@ export class UsersController {
     return this.usersService.findUserByEmail(email);
   }
 
+  @IsPublic()
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
