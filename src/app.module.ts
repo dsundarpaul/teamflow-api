@@ -6,9 +6,10 @@ import { UserModule } from './users/users.module';
 import { PrismaService } from './prisma.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/guard/auth.guard';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [UserModule, AuthModule, TeamsModule],
   controllers: [AppController],
   providers: [
     AppService,

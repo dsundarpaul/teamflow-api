@@ -21,6 +21,12 @@ enum Status {
   Active
   Inactive
 }
+
+enum TeamRole {
+  MEMBER
+  ADMIN
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -30,11 +36,28 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   role      Role     @default(USER)
+  teams     TeamMember[]
 }
 
-// each team should uniquely identify by name
-// each team should contain a list of unique users
-// a user should be part of multiple teams, unless he is an admin
-// while creating a team, atleaset there should be one admin and 1 user.
-// model Teams {}
+model Team {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  icon        String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  members     TeamMember[]
+}
 
+model TeamMember {
+  id        String   @id @default(uuid())
+  userId    String
+  teamId    String
+  role      TeamRole @default(MEMBER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}

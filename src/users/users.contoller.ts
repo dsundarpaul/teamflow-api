@@ -7,11 +7,13 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { FindAllUsersDto } from './dto/find-all-users.dto';
 import { IsPublic } from 'src/auth/decorators';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UsersController {

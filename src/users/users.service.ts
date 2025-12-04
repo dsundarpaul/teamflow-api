@@ -50,6 +50,14 @@ export class UsersService {
     });
   }
 
+  async findUserByUsername(username: string) {
+    return await this.prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+  }
+
   async updateUser(id: string, data: any) {
     console.log('UpdateUser called with ID:', id);
     console.log('Data received for update:', data);
